@@ -1,9 +1,8 @@
 class Category():
-    instances =[]
+    instances = []
     def __init__(self, category):
         self.category = category
         self.ledger = []
-        self.__class__.instances.append(self.category)
 
     def __str__(self):
         title = f"{self.category.center(30, '*')}\n"
@@ -83,23 +82,22 @@ def create_spend_chart(categories):
         result_str += str(count).rjust(3) + "|" + cat_display + ("\n")
         count -= 10
     
-    dashes = '-' + '---'*len(categories)
-    names = []
+    dashes_line = '-' + '---'*len(categories)
+    cat_names = []
     x_axis = ''
-    for cate in categories:
-        names.append(cate.category)
-    maxi = max(names, key = len)
+    for cat in categories:
+        cat_names.append(cat.category)
+    longest_cat = max(cat_names, key = len)
     
-    for x in range(len(maxi)):
+    for x in range(len(longest_cat)):
         nameStr = '     '
-        for name in names:
-            if x >= len(name):
+        for cat_name in cat_names:
+            if x >= len(cat_name):
                 nameStr += '   '
             else:
-                nameStr += name[x] + '  '
-        if x < len(maxi) - 1:
+                nameStr += cat_name[x] + '  '
+        if x < len(longest_cat) - 1:
             nameStr += '\n'
         x_axis += nameStr        
-    result_str += dashes.rjust(len(dashes)+4) + '\n' + x_axis
+    result_str += dashes_line.rjust(len(dashes_line)+4) + '\n' + x_axis
     return result_str
-
